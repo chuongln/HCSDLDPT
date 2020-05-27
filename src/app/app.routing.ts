@@ -52,22 +52,6 @@ export const routes: Routes = [
     },
     children: [
       {
-        path: 'admin',
-        loadChildren: () => import('./views/admin/admin.module').then(m => m.AdminModule)
-      },
-      {
-        path: 'jobs',
-        loadChildren: () => import('./views/jobs/jobs.module').then(m => m.JobsModule)
-      },
-      {
-        path: 'map',
-        loadChildren: () => import('./views/bando/bando.module').then(m => m.BanDoModule)
-      },
-      {
-        path: 'doc',
-        loadChildren: () => import('./views/doc/doc.module').then(m => m.DocModule)
-      },
-      {
         path: 'base',
         loadChildren: () => import('./views/base/base.module').then(m => m.BaseModule)
       },
