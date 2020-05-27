@@ -1,0 +1,70 @@
+<div class="row" mat-dialog-content translate>
+  <div class="card-header">
+    <h3 translate>viewAttachFiles </h3>
+  </div>
+</div>
+<div class="row" mat-dialog-content translate>
+</div>
+<button mat-button color="primary" (click)="onClick()">
+  <mat-icon>file_upload</mat-icon>
+  Choise File
+</button>
+<br />
+<ul>
+  <li *ngFor="let file of files">
+    <span id="file-label">
+      {{file.name}}
+      <a title="Cancel" (click)="cancelFile(file)">
+        <mat-icon>cancel</mat-icon>
+      </a>
+    </span>
+  </li>
+</ul>
+<input type="file" id="fileUpload" name="fileUpload" multiple="multiple" style="display:none;" />
+<button mat-button class="border" (click)="onSubmit()" translate>Upload</button>
+<div class="row" mat-dialog-content >
+  <h4 translate>List Files Upload</h4>
+</div>
+<div class="card-body">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="mat-elevation-z8">
+        <mat-table [dataSource]="dataSource" matSort>
+          <ng-container matColumnDef="index">
+            <mat-header-cell *matHeaderCellDef width="10%"> Index </mat-header-cell>
+            <mat-cell *matCellDef="let element; index as i"> {{paginator.pageSize * paginator.pageIndex + i + 1}}
+            </mat-cell>
+          </ng-container>
+          <!-- Code Column -->
+          <ng-container matColumnDef="filename" layout-align="center">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>
+              <div translate>filename </div>
+            </mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.filename}} </mat-cell>
+          </ng-container>
+          <mat-cell matColumnDef="actions">
+            <mat-header-cell *matHeaderCellDef layout-align="center">
+          
+            </mat-header-cell>
+
+            <mat-cell *matCellDef="let row;">
+              <button mat-icon-button color="lightGreen" (click)="downloadAttachFiles(row)">
+                <mat-icon aria-label="Download">get_app</mat-icon>
+              </button>
+              <button mat-icon-button color="warn" (click)="clickMethodDelete(row)">
+                <mat-icon aria-label="Delete">delete</mat-icon>
+              </button>
+            </mat-cell>
+          </mat-cell>
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;">
+          </mat-row>
+        </mat-table>
+        <div class="center" *ngIf="!loadListFiles">
+          <mat-progress-spinner value="10" diameter="40" mode="indeterminate"></mat-progress-spinner>
+        </div>
+        <mat-paginator [pageSizeOptions]="[5]"></mat-paginator>
+      </div>
+    </div>
+  </div>
+</div>

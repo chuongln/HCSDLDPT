@@ -1,0 +1,47 @@
+<div class="animated fadeIn">
+  <div class="card card-default">
+    <div class="card-header">
+      <i class="fa fa-align-justify"></i><a [routerLink]="['/admin']" translate>Admin</a>&nbsp;/&nbsp;
+      <strong translate>Permission</strong>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="mat-elevation-z2">
+            <mat-table [dataSource]="dataSource1" matSort>
+              <!-- Code Column -->
+              <ng-container matColumnDef="code">
+                <mat-header-cell *matHeaderCellDef mat-sort-header translate>
+                  <div translate>code</div>
+                </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.code}} </mat-cell>
+              </ng-container>
+
+              <!-- Name Column -->
+              <ng-container matColumnDef="name">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>
+                  <div translate>name</div>
+                </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.name}} </mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="description">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>
+                  <div translate>description</div>
+                </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.description}} </mat-cell>
+              </ng-container>
+              <!-- actions -->
+              <mat-header-row *matHeaderRowDef="displayedColumns1"></mat-header-row>
+              <mat-row *matRowDef="let row; columns: displayedColumns1;" [ngClass]="{ 'selected': row == selectedRow1 }"
+                (click)="onSelectedRow(row)">
+              </mat-row>
+            </mat-table>
+            <div class="center" *ngIf="!loadTable1">
+              <mat-progress-spinner value="10" diameter="40" mode="indeterminate"></mat-progress-spinner>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,77 @@
+<form [formGroup]="canBoForm" (ngSubmit)="onSubmit()" novalidate>
+  <div mat-dialog-content>
+    <h2 mat-dialog-title translate>canBo</h2>
+    <div class="form-group field">
+      <label translate>id_doc_donvi</label>
+      <div class="control">
+        <mat-select class="form-control input is-primary" formControlName="id_doc_donvi"
+          [ngClass]="{ 'is-invalid': submitted && f.id_doc_donvi.errors }">
+          <mat-option *ngFor="let donVi of donVis" [value]="donVi.value">
+            {{donVi.display}}
+          </mat-option>
+        </mat-select>
+      </div>
+    </div>
+    <div class="form-group field">
+      <label translate>ma</label>
+      <div class="control">
+        <input class="form-control input is-primary" formControlName="ma"
+          [ngClass]="{ 'is-invalid': submitted && f.ma.errors }" />
+      </div>
+    </div>
+    <div class="form-group field">
+      <label translate>hoTen</label>
+      <div class="control">
+        <input class="form-control input is-primary" formControlName="hoTen"
+          [ngClass]="{ 'is-invalid': submitted && f.hoTen.errors }" />
+        <div *ngIf="submitted && f.hoTen.errors" class="help is-danger">
+          <div *ngIf="f.hoTen.errors.required" translate>hoTen is required</div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group field">
+      <label translate>gioiTinh</label>
+      <div class="control">
+        <mat-select class="form-control input is-primary" formControlName="gioiTinh"
+          [ngClass]="{ 'is-invalid': submitted && f.gioiTinh.errors }">
+          <mat-option [value]=1 > <div translate>Men</div> 
+          </mat-option>
+          <mat-option [value]=0 > <div translate>Women</div> 
+          </mat-option>
+        </mat-select>
+      </div>
+    </div>
+    <div class="form-group field">
+      <label translate>chucVu</label>
+      <div class="control">
+        <input class="form-control input is-primary" formControlName="chucVu"
+          [ngClass]="{ 'is-invalid': submitted && f.chucVu.errors }" />
+      </div>
+    </div>
+    <div class="form-group field">
+      <label translate>chucDanh</label>
+      <div class="control">
+        <input class="form-control input is-primary" formControlName="chucDanh"
+          [ngClass]="{ 'is-invalid': submitted && f.chucDanh.errors }" />
+      </div>
+    </div>
+    <div class="form-group field">
+      <label translate>boPhan</label>
+      <div class="control">
+        <input class="form-control input is-primary" formControlName="boPhan"
+          [ngClass]="{ 'is-invalid': submitted && f.boPhan.errors }" />
+      </div>
+    </div>
+    <div class="form-group field">
+      <label translate>ghiChu</label>
+      <div class="control">
+        <input class="form-control input is-primary" formControlName="ghiChu"
+          [ngClass]="{ 'is-invalid': submitted && f.ghiChu.errors }" />
+      </div>
+    </div>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button type="button" (click)="onNoClick()">No</button>
+    <button mat-button type="submit" cdkFocusInitial>Yes</button>
+  </div>
+</form>

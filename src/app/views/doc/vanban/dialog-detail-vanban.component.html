@@ -1,0 +1,270 @@
+<form [formGroup]="vanBanForm" (ngSubmit)="onSubmit()" novalidate>
+  <div mat-dialog-content>
+    <h2 mat-dialog-title translate>Detail</h2>
+    <div class="form-group field">
+      <label translate>soHieu</label>
+      <div class="control">
+          <label class="form-control input is-primary">{{data.body.soHieu}}</label>
+      </div>
+    </div>
+    <div class="form-group field">
+      <label translate>soVaoSo</label>
+      <div class="control">
+        <label class="form-control input is-primary">{{data.body.soVaoSo}}</label>
+      </div>
+    </div>
+    <div class="form-group field">
+      <label translate>trichYeu</label>
+      <div class="control">
+        <quill-editor formControlName="trichYeu"></quill-editor>
+        <div *ngIf="submitted && f.trichYeu.errors" class="help is-danger">
+          <div *ngIf="f.trichYeu.errors.required" translate>trichYeu is required</div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group field">
+      <label translate>tomTat</label>
+      <div class="control">
+        <quill-editor formControlName="tomTat"></quill-editor>
+        <div *ngIf="submitted && f.tomTat.errors" class="help is-danger">
+          <div *ngIf="f.tomTat.errors.required" translate>tomTat is required</div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-md-4">
+        <label translate>loaiVanBan</label>
+        <div class="control">
+          <mat-select class="form-control input is-primary" formControlName="id_dm_loaiVanBan"
+            [ngClass]="{ 'is-invalid': submitted && f.id_dm_loaiVanBan.errors }">
+            <mat-option>
+              <div translate>None</div>
+            </mat-option>
+            <mat-option *ngFor="let loaiVanBan of loaiVanBans" [value]="loaiVanBan.value">
+              {{loaiVanBan.display}}
+            </mat-option>
+          </mat-select>
+          <div *ngIf="submitted && f.id_dm_loaiVanBan.errors" class="help is-danger">
+            <div *ngIf="f.id_dm_loaiVanBan.errors.required" translate>loaiVanBanSuCo is required</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <label translate>linhVucVanBan</label>
+        <div class="control">
+          <mat-select class="form-control input is-primary" formControlName="id_dm_linhVucVanBan"
+            [ngClass]="{ 'is-invalid': submitted && f.id_dm_linhVucVanBan.errors }">
+            <mat-option>
+              <div translate>None</div>
+            </mat-option>
+            <mat-option *ngFor="let linhVucVanBan of linhVucVanBans" [value]="linhVucVanBan.value">
+              {{linhVucVanBan.display}}
+            </mat-option>
+          </mat-select>
+          <div *ngIf="submitted && f.id_dm_linhVucVanBan.errors" class="help is-danger">
+            <div *ngIf="f.id_dm_linhVucVanBan.errors.required" translate>linhVucVanBanSuCo is required</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <label translate>coQuanBanHanh</label>
+        <div class="control">
+          <mat-select class="form-control input is-primary" formControlName="id_dm_coQuanBanHanh"
+            [ngClass]="{ 'is-invalid': submitted && f.id_dm_coQuanBanHanh.errors }">
+            <mat-option>
+              <div translate>None</div>
+            </mat-option>
+            <mat-option *ngFor="let coQuanBanHanh of coQuanBanHanhs" [value]="coQuanBanHanh.value">
+              {{coQuanBanHanh.display}}
+            </mat-option>
+          </mat-select>
+          <div *ngIf="submitted && f.id_dm_coQuanBanHanh.errors" class="help is-danger">
+            <div *ngIf="f.id_dm_coQuanBanHanh.errors.required" translate>coQuanBanHanhSuCo is required</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-md-4">
+        <label translate>mucDoKhan</label>
+        <div class="control">
+          <mat-select class="form-control input is-primary" formControlName="id_dm_mucDoKhan"
+            [ngClass]="{ 'is-invalid': submitted && f.id_dm_mucDoKhan.errors }">
+            <mat-option>
+              <div translate>None</div>
+            </mat-option>
+            <mat-option *ngFor="let mucDoKhan of mucDoKhans" [value]="mucDoKhan.value">
+              {{mucDoKhan.display}}
+            </mat-option>
+          </mat-select>
+          <div *ngIf="submitted && f.id_dm_mucDoKhan.errors" class="help is-danger">
+            <div *ngIf="f.id_dm_mucDoKhan.errors.required" translate>mucDoKhanSuCo is required</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <label translate>mucDoMat</label>
+        <div class="control">
+          <mat-select class="form-control input is-primary" formControlName="id_dm_mucDoMat"
+            [ngClass]="{ 'is-invalid': submitted && f.id_dm_mucDoMat.errors }">
+            <mat-option>
+              <div translate>None</div>
+            </mat-option>
+            <mat-option *ngFor="let mucDoMat of mucDoMats" [value]="mucDoMat.value">
+              {{mucDoMat.display}}
+            </mat-option>
+          </mat-select>
+          <div *ngIf="submitted && f.id_dm_mucDoMat.errors" class="help is-danger">
+            <div *ngIf="f.id_dm_mucDoMat.errors.required" translate>mucDoMatSuCo is required</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <label translate>hinhThucGuiNhan</label>
+        <div class="control">
+          <mat-select class="form-control input is-primary" formControlName="id_dm_hinhThucGuiNhan"
+            [ngClass]="{ 'is-invalid': submitted && f.id_dm_hinhThucGuiNhan.errors }">
+            <mat-option>
+              <div translate>None</div>
+            </mat-option>
+            <mat-option *ngFor="let hinhThucGuiNhan of hinhThucGuiNhans" [value]="hinhThucGuiNhan.value">
+              {{hinhThucGuiNhan.display}}
+            </mat-option>
+          </mat-select>
+          <div *ngIf="submitted && f.id_dm_hinhThucGuiNhan.errors" class="help is-danger">
+            <div *ngIf="f.id_dm_hinhThucGuiNhan.errors.required" translate>hinhThucGuiNhanSuCo is required</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-md-6">
+        <label translate>ngayBanHanh</label>
+        <div class="control">
+          <label class="form-control input is-primary">{{data.body.ngayBanHanh| amFromUtc | amDateFormat: 'DD/MM/YYYY'}}</label>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <label translate>ngayHetHieuLuc</label>
+        <div class="control">
+          <label class="form-control input is-primary">{{data.body.ngayHetHieuLuc| amFromUtc | amDateFormat: 'DD/MM/YYYY'}}</label>
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-md-4">
+        <label translate>isDonViNgoai</label>
+        <div class="control">
+          <mat-select class="form-control input is-primary" formControlName="isDonViNgoai"
+            [ngClass]="{ 'is-invalid': submitted && f.isDonViNgoai.errors }">
+            <mat-option [value]=1>
+              <div translate>Yes</div>
+            </mat-option>
+            <mat-option [value]=0 translate>
+              <div translate>No</div>
+            </mat-option>
+          </mat-select>
+          <div *ngIf="submitted && f.isDonViNgoai.errors" class="help is-danger">
+            <div *ngIf="f.isDonViNgoai.errors.required" translate>isDonViNgoai is required</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4" *ngIf="f.isDonViNgoai.value==1">
+        <label translate>id_donvi_thucHien</label>
+        <div class="control">
+          <mat-select class="form-control input is-primary" formControlName="id_donvi_thucHien"
+            [ngClass]="{ 'is-invalid': submitted && f.id_donvi_thucHien.errors }"
+            (selectionChange)="getCanBoDonViNgoai()">
+            <mat-option>
+              <div translate>None</div>
+            </mat-option>
+            <mat-option *ngFor="let donViNgoai of donViNgoais" [value]="donViNgoai.value">
+              {{donViNgoai.display}}
+            </mat-option>
+          </mat-select>
+          <div *ngIf="submitted && f.id_donvi_thucHien.errors" class="help is-danger">
+            <div *ngIf="f.id_donvi_thucHien.errors.required" translate>id_donvi_thucHien is required</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4" *ngIf="f.isDonViNgoai.value==1 && f.id_donvi_thucHien.value ">
+        <label translate>id_canbo_ThucHien</label>
+        <div class="control">
+          <mat-select class="form-control input is-primary" formControlName="id_canbo_ThucHien"
+            [ngClass]="{ 'is-invalid': submitted && f.id_canbo_ThucHien.errors }">
+            <mat-option>
+              <div translate>None</div>
+            </mat-option>
+            <mat-option *ngFor="let canBoNgoai of canBoNgoais" [value]="canBoNgoai.value">
+              {{canBoNgoai.display}}
+            </mat-option>
+          </mat-select>
+          <div *ngIf="submitted && f.id_canbo_ThucHien.errors" class="help is-danger">
+            <div *ngIf="f.id_canbo_ThucHien.errors.required" translate>id_canbo_ThucHien is required</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4" *ngIf="f.isDonViNgoai.value==0">
+        <label translate>id_donvi_thucHien</label>
+        <div class="control">
+          <div class="input-group-prepend" dropdown disabled="true">
+            <button type="button" class="btn btn-block input is-primary input" dropdownToggle>
+              <label *ngIf="selectedDonVis">{{selectedDonVis.label}}</label>
+              <label *ngIf="!selectedDonVis">&nbsp; </label>
+              <label class="dropdown-toggle dropdown-toggle-right1"></label>
+            </button>
+          </div>
+          <div *ngIf="submitted && f.id_donvi_thucHien.errors" class="help is-danger">
+            <div *ngIf="f.id_donvi_thucHien.errors.required" translate>id_donvi_thucHien is required</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4" *ngIf="f.isDonViNgoai.value==0 && f.id_donvi_thucHien.value ">
+        <label translate>id_canbo_ThucHien</label>
+        <div class="control">
+          <mat-select class="form-control input is-primary" formControlName="id_canbo_ThucHien"
+            [ngClass]="{ 'is-invalid': submitted && f.id_canbo_ThucHien.errors }">
+            <mat-option>
+              <div translate>None</div>
+            </mat-option>
+            <mat-option *ngFor="let canBo of canBos" [value]="canBo.value">
+              {{canBo.display}}
+            </mat-option>
+          </mat-select>
+          <div *ngIf="submitted && f.id_canbo_ThucHien.errors" class="help is-danger">
+            <div *ngIf="f.id_canbo_ThucHien.errors.required" translate>id_canbo_ThucHien is required</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group field">
+      <label translate>ngayThucHien</label>
+      <div class="control">
+        <label class="form-control input is-primary">{{data.body.ngayThucHien| amFromUtc | amDateFormat: 'DD/MM/YYYY'}}</label>
+      </div>
+    </div>
+    <div class="form-group field">
+      <label translate>ngayKy</label>
+      <div class="control">
+        <label class="form-control input is-primary">{{data.body.ngayKy| amFromUtc | amDateFormat: 'DD/MM/YYYY'}}</label>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-md-6">
+        <label translate>nguoiKy</label>
+        <div class="control">
+          <label class="form-control input is-primary">{{data.body.nguoiKy}}</label>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <label translate>nguoiKyNhay</label>
+        <div class="control">
+          <label class="form-control input is-primary">{{data.body.nguoiKyNhay}}</label>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button type="button" (click)="onNoClick()">Ok</button>
+  </div>
+</form>

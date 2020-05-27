@@ -1,0 +1,98 @@
+<form [formGroup]="accountForm" (ngSubmit)="onSubmit()" novalidate>
+  <div mat-dialog-content>
+    <h1 mat-dialog-title>Add new portal account</h1>
+    <div class="form-group field">
+      <label>CanBo</label>
+      <div class="control">
+        <mat-select class="form-control input is-primary" formControlName="id_canbo"
+          [ngClass]="{ 'is-invalid': submitted && f.id_canbo.errors }">
+          <mat-option *ngFor="let canBo of canBos" [value]="canBo.value">
+            {{canBo.display}}
+          </mat-option>
+        </mat-select>
+        <div *ngIf="submitted && f.id_canbo.errors" class="help is-danger">
+          <div *ngIf="f.id_canbo.errors.required" translate>CanBo is required</div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group field">
+      <label>Username</label>
+      <div class="control">
+        <input class="form-control input is-primary" formControlName="username"
+          [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
+        <div *ngIf="submitted && f.username.errors" class="help is-danger">
+          <div *ngIf="f.username.errors.required">Username is required</div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group field">
+      <label>Fullname</label>
+      <div class="control">
+        <input class="form-control input is-primary" formControlName="fullname"
+          [ngClass]="{ 'is-invalid': submitted && f.fullname.errors }" />
+        <div *ngIf="submitted && f.fullname.errors" class="help is-danger">
+          <div *ngIf="f.fullname.errors.required">Fullname is required</div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group field">
+      <label>Password</label>
+      <div class="control">
+        <input class="form-control input is-primary" type="password" formControlName="password"
+          [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+        <div *ngIf="submitted && f.password.errors" class="help is-danger">
+          <div *ngIf="f.password.errors.required">Password is required</div>
+          <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group field">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="control">
+            <div class="input-group-prepend" dropdown>
+              <button type="button" class="btn btn-block input is-primary input" dropdownToggle translate>
+                <label translate>donVi </label>
+                <label class="dropdown-toggle dropdown-toggle-right"></label>
+              </button>
+              <div class="dropdown-menu" *dropdownMenu (click)="$event.stopPropagation()">
+                <!-- <p-tree [value]="donVis" selectionMode="checkbox" [(selection)]="selectedBaoCaos"></p-tree> -->
+                <kendo-treeview class="treeview" [nodes]="donViTree" [children]="children" [hasChildren]="hasChildren"
+                  textField="label" kendoTreeViewExpandable [(expandedKeys)]="expandedKeys" [expandBy]="'label'" [kendoTreeViewCheckable]="checkableSettings" [(checkedKeys)]="id_donVis"
+                  [checkBy]="'data'">
+                </kendo-treeview>
+                <div class="center" *ngIf="!loadTree1">
+                  <mat-progress-spinner value="10" diameter="40" mode="indeterminate"></mat-progress-spinner>
+                </div>
+              </div>
+            </div>  
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="control">
+            <div class="input-group-prepend is-primary" dropdown>
+              <button type="button" class="btn btn-block input is-primary input" dropdownToggle translate>
+                <label translate>Role </label>
+                <label class="dropdown-toggle dropdown-toggle-right"></label>
+              </button>
+              <div class="dropdown-menu col-md-12" *dropdownMenu (click)="$event.stopPropagation()">
+                <!-- <p-tree [value]="donVis" selectionMode="checkbox" [(selection)]="selectedBaoCaos"></p-tree> -->
+                <kendo-treeview class="treeview" [nodes]="roleTree" [children]="children" [hasChildren]="hasChildren"
+                  textField="name" kendoTreeViewExpandable [kendoTreeViewCheckable]="checkableSettings"
+                  [(checkedKeys)]="id_roles" [checkBy]="'id'">
+                </kendo-treeview>
+                <div class="center" *ngIf="!loadTree2">
+                  <mat-progress-spinner value="10" diameter="40" mode="indeterminate"></mat-progress-spinner>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button type="button" (click)="onNoClick()">No</button>
+    <button mat-button type="submit" cdkFocusInitial>Yes</button>
+  </div>
+</form>

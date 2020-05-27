@@ -1,0 +1,129 @@
+<form [formGroup]="projectForm" (ngSubmit)="onSubmit()" novalidate>
+  <div mat-dialog-content>
+    <h2 mat-dialog-title translate>Project</h2>
+    <div class="form-group field" *ngIf="data.allowEdit===1">
+      <label translate>kieuDuLieu</label>
+      <div class="control">
+        <mat-select class="form-control input is-primary" formControlName="id_sys_dataTypes"
+          [ngClass]="{ 'is-invalid': submitted && f.id_sys_dataTypes.errors }">
+          <mat-option *ngFor="let dataType of dataTypes" [value]="dataType.value">
+            {{dataType.display}}
+          </mat-option>
+        </mat-select>
+        <div *ngIf="submitted && f.id_sys_dataTypes.errors" class="help is-danger">
+          <div *ngIf="f.id_sys_dataTypes.errors.required" translate>id_sys_dataTypes is required</div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group field" *ngIf="data.allowEdit===1">
+      <label translate>loaiDuAn</label>
+      <div class="control">
+        <mat-select class="form-control input is-primary" formControlName="id_project_type"
+          [ngClass]="{ 'is-invalid': submitted && f.id_project_type.errors }">
+          <mat-option *ngFor="let projectType of projectTypes" [value]="projectType.value">
+            {{projectType.display}}
+          </mat-option>
+        </mat-select>
+      </div>
+    </div>
+    <div class="form-group field">
+      <label translate>codeProject</label>
+      <div class="control">
+        <input class="form-control input is-primary" formControlName="code"
+          [ngClass]="{ 'is-invalid': submitted && f.code.errors }" />
+        <div *ngIf="submitted && f.code.errors" class="help is-danger">
+          <div *ngIf="f.code.errors.required" translate>code is required</div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group field">
+      <label translate>name</label>
+      <div class="control">
+        <input class="form-control input is-primary" formControlName="name"
+          [ngClass]="{ 'is-invalid': submitted && f.name.errors }" />
+        <div *ngIf="submitted && f.name.errors" class="help is-danger">
+          <div *ngIf="f.name.errors.required" translate>name is required</div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group field">
+      <label translate>description</label>
+      <div class="control">
+        <quill-editor formControlName="description"></quill-editor>
+      </div>
+    </div>
+    <div class="form-group field">
+      <label translate>account_manager</label>
+      <div class="control">
+        <mat-select class="form-control input is-primary" formControlName="id_account_manager"
+          [ngClass]="{ 'is-invalid': submitted && f.id_account_manager.errors }">
+          <mat-option *ngFor="let accountManager of accountManagers" [value]="accountManager.value">
+            {{accountManager.display}}
+          </mat-option>
+        </mat-select>
+        <div *ngIf="submitted && f.id_account_manager.errors" class="help is-danger">
+          <div *ngIf="f.id_account_manager.errors.required" translate>id_account_manager is required</div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group field" >
+      <label translate>tenState</label>
+      <div class="control">
+        <mat-select class="form-control input is-primary" formControlName="id_sys_workflow"
+          [ngClass]="{ 'is-invalid': submitted && f.id_sys_workflow.errors }">
+          <mat-option *ngFor="let sysWorkflow of sysWorkflows" [value]="sysWorkflow.value">
+            {{sysWorkflow.display}}
+          </mat-option>
+        </mat-select>
+        <div *ngIf="submitted && f.id_sys_workflow.errors" class="help is-danger">
+          <div *ngIf="f.id_sys_workflow.errors.required" translate>id_sys_workflow is required</div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group row" *ngIf="data.allowEdit===1">
+      <div class="col-md-6">
+        <label class="col-form-label" translate>allowEdit</label>
+      </div>
+      <div class="col-md-6">
+        <div class="form-check form-check-inline">
+          <input class="form-check-input is-primary" formControlName="allowEdit" type="radio" name="allowEdit"
+            value="1">
+          <label class="form-check-label is-primary" for="inlineRadio1" translate> Yes </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input is-primary" formControlName="allowEdit" type="radio" name="allowEdit"
+            value="0">
+          <label class="form-check-label is-primary" translate> No </label>
+        </div>
+        <div *ngIf="submitted && f.allowEdit.errors" class="help is-danger">
+          <div *ngIf="f.allowEdit.errors.required" translate>allowEdit is required</div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group field">
+      <label translate>startDate</label>
+      <div class="control">
+        <input type="date" class="form-control input is-primary" formControlName="startDate"
+          [ngClass]="{ 'is-invalid': submitted && f.startDate.errors }" />
+      </div>
+    </div>
+    <div class="form-group field">
+      <label translate>dueDate</label>
+      <div class="control">
+        <input type="date" class="form-control input is-primary" formControlName="dueDate"
+          [ngClass]="{ 'is-invalid': submitted && f.dueDate.errors }" />
+      </div>
+    </div>
+    <div class="form-group field">
+      <label translate>finishDate</label>
+      <div class="control">
+        <input type="date" class="form-control input is-primary" formControlName="finishDate"
+          [ngClass]="{ 'is-invalid': submitted && f.finishDate.errors }" />
+      </div>
+    </div>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button type="button" (click)="onNoClick()">No</button>
+    <button mat-button type="submit" cdkFocusInitial>Yes</button>
+  </div>
+</form>

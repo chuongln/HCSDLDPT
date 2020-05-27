@@ -1,0 +1,74 @@
+<form [formGroup]="projectMemberForm" (ngSubmit)="onSubmit()" novalidate>
+  <div mat-dialog-content>
+    <h2 mat-dialog-title translate>ProjectMember</h2>
+    <div class="form-group field">
+      <label translate>portal_account</label>
+      <div class="control">
+        <mat-select class="form-control input is-primary" formControlName="id_portal_account"
+          [ngClass]="{ 'is-invalid': submitted && f.id_portal_account.errors }">
+          <mat-option *ngFor="let account of accounts" [value]="account.value">
+            {{account.display}}
+          </mat-option>
+        </mat-select>
+        <div *ngIf="submitted && f.id_portal_account.errors" class="help is-danger">
+          <div *ngIf="f.id_portal_account.errors.required" translate>id_portal_account is required</div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-md-6">
+        <label class="col-form-label">
+          <label translate> isLeader </label>
+        </label>
+      </div>
+      <div class="col-md-6">
+        <div class="form-check form-check-inline">
+          <input class="form-check-input is-primary" formControlName="isLeader" type="radio" name="isLeader" value="1">
+          <label class="form-check-label is-primary" for="inlineRadio1" translate> Yes </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input is-primary" formControlName="isLeader" type="radio" name="isLeader" value="0">
+          <label class="form-check-label is-primary" translate> No </label>
+        </div>
+        <div *ngIf="submitted && f.isLeader.errors" class="help is-danger">
+          <div *ngIf="f.isLeader.errors.required" translate>isLeader is required</div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group field">
+      <label translate>tenState</label>
+      <div class="control">
+        <mat-select class="form-control input is-primary" formControlName="id_sys_workflow_state"
+          [ngClass]="{ 'is-invalid': submitted && f.id_sys_workflow_state.errors }">
+          <mat-option *ngFor="let sysWorkflowState of sysWorkflowStates" [value]="sysWorkflowState.value">
+            {{sysWorkflowState.display}}
+          </mat-option>
+        </mat-select>
+        <div *ngIf="submitted && f.id_sys_workflow_state.errors" class="help is-danger">
+          <div *ngIf="f.id_sys_workflow_state.errors.required" translate>id_sys_workflow_state is required</div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group field">
+      <label translate>description</label>
+      <div class="control">
+        <quill-editor formControlName="description"></quill-editor>
+      </div>
+    </div>
+    <div class="form-group field">
+      <label translate>sortOrder</label>
+      <div class="control">
+        <input type="number" class="form-control input is-primary" formControlName="sortOrder"
+          [ngClass]="{ 'is-invalid': submitted && f.sortOrder.errors }" />
+        <div *ngIf="submitted && f.sortOrder.errors" class="help is-danger">
+          <div *ngIf="f.sortOrder.errors.required" translate>sortOrder is required</div>
+          <div *ngIf="f.sortOrder.errors.min" translate>sortOrder min = 0</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button type="button" (click)="onNoClick()">No</button>
+    <button mat-button type="submit" cdkFocusInitial>Yes</button>
+  </div>
+</form>

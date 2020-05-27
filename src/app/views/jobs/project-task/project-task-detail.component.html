@@ -1,0 +1,137 @@
+<div class="animated fadeIn">
+  <div class="card card-default">
+    <div class="card-header">
+      <i class="fa fa-align-justify"></i><a [routerLink]="['/jobs']" translate>jobs</a>&nbsp;/&nbsp;
+      <a [routerLink]="['/jobs/project/task']" translate>Tasks</a>&nbsp;/&nbsp;
+      <strong translate>TaskDetail</strong>
+    </div>
+    <div class="card-body">
+      <div class="col-md-12" *ngIf="data_task">
+        <div class="form-group row">
+          <div class="col-md-8">
+            <div class="row">
+              <div class="col-md-6">
+                <label class="col-form-label" translate><strong translate>codeTask</strong></label>:
+                <label>{{data_task.code}} </label>
+              </div>
+              <div class="col-md-6">
+                <label class="col-form-label" translate><strong translate>id_dm_priority</strong></label>:
+                <label>{{data_task.doUuTien}} </label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <label class="col-form-label" translate><strong translate>id_sys_workflow_state</strong></label>:
+                <label>{{data_task.trangThai}} </label>
+              </div>
+              <div class="col-md-6" *ngIf="data_task.tenThanhPhan">
+                <label class="col-form-label" translate><strong translate>id_components</strong></label>:
+                <label>{{data_task.tenThanhPhan}}</label>
+              </div>
+            </div>
+            <div class="row" *ngIf="data_task.isSubTask.data[0]===1">
+              <div class="col-md-6">
+                <label class="col-form-label" translate><strong translate>isSubTask</strong></label>: <label
+                  translate>Yes</label>
+              </div>
+              <div class="col-md-6">
+                <label class="col-form-label" translate><strong translate>parent_id_task</strong></label>:
+                <label>{{data_task.parentTask}}</label>
+              </div>
+            </div>
+            <div class="row" *ngIf="data_task.isSubTask.data[0]===0">
+              <div class="col-md-6">
+                <label class="col-form-label" translate><strong translate>isSubTask</strong></label>: <label
+                  translate>No</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <label class="col-form-label" translate><strong translate>completePercent</strong></label>:
+                <label *ngIf="data_task.completePercent">{{data_task.completePercent}}%</label>
+                <label *ngIf="!data_task.completePercent">0%</label>
+                <button (click)="openDialogTask({dialog : 'percent', body : data_task})"
+                  *ngIf="account_id===data_task.id_account_incharge||account_id===data_task.id_account_manager">
+                  <i class="fa fa-pencil fa-lg"></i>
+                </button>
+              </div>
+            </div>
+            <label class="col-form-label" translate><strong translate>summary</strong></label>
+            <div [innerHTML]="data_task.summary">
+            </div>
+            <label class="col-form-label" translate><strong translate>Description</strong></label>
+            <div class="control">
+              <label [innerHTML]="data_task.description"></label>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <strong translate>People
+              <button (click)="openDialogTask({dialog : 'people', body : data_task})"
+                *ngIf="account_id===data_task.id_account_incharge||account_id===data_task.id_account_manager">
+                <i class="fa fa-pencil fa-lg"></i>
+              </button>
+            </strong>
+            <div>
+              <label translate>assignTo</label>: <label>{{data_task.nguoiThucHien}}
+                ({{data_task.usernameNguoiThucHien}})</label>
+            </div>
+            <div>
+              <label translate>id_account_incharge</label>: <label>{{data_task.nguoiPhuTrach}}
+                ({{data_task.usernameNguoiPhuTrach}})</label>
+            </div>
+            <div>
+              <label translate>createBy</label>: <label>{{data_task.nguoiTao}}
+                ({{data_task.usernameNguoiTao}})</label>
+            </div>
+            <strong translate>Date</strong>
+            <div>
+              <label translate>dueDate</label>:
+              <label>{{data_task.dueDate| amFromUtc | amDateFormat: 'DD/MM/YYYY' }}</label>
+            </div>
+            <div>
+              <label translate>createDate</label>:
+              <label>{{data_task.createDate| amFromUtc | amDateFormat: 'DD/MM/YYYY'}}</label>
+            </div>
+            <div>
+              <label translate>updateDate</label>:
+              <label>{{data_task.updateDate| amFromUtc | amDateFormat: 'DD/MM/YYYY'}}</label>
+            </div>
+            <div *ngIf="data_task.duration">
+              <label translate>duration</label>:
+              <label>{{data_task.duration}}h</label>
+            </div>
+          </div>
+        </div>
+        <div class="form-group row">
+          <button (click)="openComments({'id':data_task.id, 'code': 'QLDA', permission: permissionComment})">
+            <i class="fa fa-comment fa-lg"></i> 
+            <label translate>Comments</label>
+          </button>
+          <button (click)="openAttachFiles({tableName:'jobs_project_task', id_data: data_task.id, permission: permissionAttachsFile})">
+            <i class="fa fa-download fa-lg"></i>
+            <label translate>viewAttachFiles</label>
+          </button>
+          <button (click)="openProjectTaskDialog({id_project : data_task.id_project, body : data_task})"
+            *ngIf="account_id===data_task.id_account_incharge||account_id===data_task.id_account_manager">
+            <i class="fa fa-pencil fa-lg"></i>
+            <label translate>Edit</label>
+          </button>
+          <button (click)="openActivityLog(data_task)">
+            <i class="fa fa-search fa-lg"></i>
+            <label translate>Activity Log</label>
+          </button>
+          <button (click)="openDialogActivity(data_task)"
+            *ngIf="account_id===data_task.id_account_incharge||account_id===data_task.id_account_manager||account_id===data_task.assignTo">
+            <i class="fa fa-add fa-lg"></i>
+            <label translate>Activity</label>
+          </button>
+          <button (click)="openDialogNghiepVu({id:data_task.id_data})"
+          *ngIf="data_task.id_data && data_task.state_code && (account_id===data_task.id_account_incharge||account_id===data_task.id_account_manager||account_id===data_task.assignTo)">
+          <i class="fa fa-add fa-lg"></i>
+          <label translate>Nghiep Vu</label>
+        </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,130 @@
+<form [formGroup]="projectTaskForm" (ngSubmit)="onSubmit()" novalidate>
+  <div mat-dialog-content>
+    <h2 mat-dialog-title translate *ngIf="this.data.parent_id">Update SubTask</h2>
+    <h2 mat-dialog-title translate *ngIf="!this.data.parent_id">Update ProjectTask</h2>
+    <div class="form-group field"  *ngIf="!this.data.id_project">
+      <label translate>id_project</label>
+      <div class="control">
+        <mat-select class="form-control input is-primary" formControlName="id_project"
+          [ngClass]="{ 'is-invalid': submitted && f.id_project.errors }" (ngModelChange)="onSelectProject()">
+          <mat-option *ngFor="let project of projects" [value]="project.value">
+            {{project.display}}
+          </mat-option>
+        </mat-select>
+        <div *ngIf="submitted && f.id_project.errors" class="help is-danger">
+          <div *ngIf="f.id_project.errors.required" translate>id_project is required</div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group field">
+      <label translate>code</label>
+      <div class="control">
+        <input class="form-control input is-primary" formControlName="code"
+          [ngClass]="{ 'is-invalid': submitted && f.code.errors }" />
+        <div *ngIf="submitted && f.code.errors" class="help is-danger">
+          <div *ngIf="f.code.errors.required" translate>code is required</div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group field">
+      <label translate>summary</label>
+      <div class="control">
+        <quill-editor formControlName="summary"></quill-editor>
+        <div *ngIf="submitted && f.summary.errors" class="help is-danger">
+          <div *ngIf="f.summary.errors.required" translate>summary is required</div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group field">
+      <label translate>description</label>
+      <div class="control">
+        <quill-editor formControlName="description"></quill-editor>
+      </div>
+    </div>
+    <div class="form-group field">
+      <label translate>id_dm_priority</label>
+      <div class="control">
+        <mat-select class="form-control input is-primary" formControlName="id_dm_priority"
+          [ngClass]="{ 'is-invalid': submitted && f.priority.errors }">
+          <mat-option *ngFor="let priority of prioritys" [value]="priority.value">
+            {{priority.display}}
+          </mat-option>
+        </mat-select>
+        <div *ngIf="submitted && f.id_dm_priority.errors" class="help is-danger">
+          <div *ngIf="f.id_dm_priority.errors.required" translate>id_dm_priority is required</div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group field">
+      <label translate>duration</label>(giờ)
+      <div class="control">
+        <input type="number" class="form-control input is-primary" formControlName="duration"
+          [ngClass]="{ 'is-invalid': submitted && f.duration.errors }" />
+      </div>
+    </div>
+    <div class="form-group field">
+      <label translate>dueDate</label>
+      <div class="control">
+        <input type="date" class="form-control input is-primary" formControlName="dueDate"
+          [ngClass]="{ 'is-invalid': submitted && f.dueDate.errors }" />
+      </div>
+    </div>
+    <div class="form-group field">
+      <label translate>id_components</label>
+      <div class="control">
+        <mat-select class="form-control input is-primary" formControlName="id_components"
+        [ngClass]="{ 'is-invalid': submitted && f.id_components.errors }">
+          <mat-option *ngFor="let component of components" [value]="component.value">
+            {{component.display}}
+          </mat-option>
+        </mat-select>
+      </div>
+    </div>
+    <div class="form-group field">
+      <label translate>id_account_incharge</label>
+      <div class="control">
+        <mat-select class="form-control input is-primary" formControlName="id_account_incharge"
+          [ngClass]="{ 'is-invalid': submitted && f.id_account_incharge.errors }">
+          <mat-option *ngFor="let account of accounts" [value]="account.value">
+            {{account.display}}
+          </mat-option>
+        </mat-select>
+        <div *ngIf="submitted && f.id_account_incharge.errors" class="help is-danger">
+          <div *ngIf="f.id_account_incharge.errors.required" translate>id_account_incharge is required</div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group field">
+      <label translate>assignTo</label>
+      <div class="control">
+        <mat-select class="form-control input is-primary" formControlName="assignTo"
+          [ngClass]="{ 'is-invalid': submitted && f.assignTo.errors }">
+          <mat-option *ngFor="let account of accounts" [value]="account.value">
+            {{account.display}}
+          </mat-option>
+        </mat-select>
+        <div *ngIf="submitted && f.assignTo.errors" class="help is-danger">
+          <div *ngIf="f.assignTo.errors.required" translate>assignTo is required</div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group field">
+      <label translate>id_sys_workflow_state</label>
+      <div class="control">
+        <mat-select class="form-control input is-primary" formControlName="id_sys_workflow_state"
+          [ngClass]="{ 'is-invalid': submitted && f.id_sys_workflow_state.errors }">
+          <mat-option *ngFor="let sysWorkflowState of sysWorkflowStates" [value]="sysWorkflowState.value">
+            {{sysWorkflowState.display}}
+          </mat-option>
+        </mat-select>
+        <div *ngIf="submitted && f.id_sys_workflow_state.errors" class="help is-danger">
+          <div *ngIf="f.id_sys_workflow_state.errors.required" translate>id_sys_workflow_state is required</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button type="button" (click)="onNoClick()">No</button>
+    <button mat-button type="submit" cdkFocusInitial>Yes</button>
+  </div>
+</form>

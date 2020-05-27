@@ -1,0 +1,76 @@
+<div class="animated fadeIn">
+  <div class="card card-default">
+    <div class="card-header">
+      <i class="fa fa-align-justify"></i><a [routerLink]="['/doc']" translate>doc</a>&nbsp;/&nbsp;
+      <strong translate>loaiVanBan</strong>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="mat-elevation-z2">
+            <mat-table [dataSource]="dataSource" matSort>
+              <!-- Code Column -->
+              <ng-container matColumnDef="code">
+                <mat-header-cell *matHeaderCellDef mat-sort-header translate>
+                  <div translate>code</div>
+                </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.code}} </mat-cell>
+              </ng-container>
+
+              <!-- Name Column -->
+              <ng-container matColumnDef="name">
+                <mat-header-cell *matHeaderCellDef mat-sort-header translate>
+                  <div translate>name</div>
+                </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.name}} </mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="parent_id">
+                <mat-header-cell *matHeaderCellDef mat-sort-header translate>
+                  <div translate>parent_id_doc</div>
+                </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.parent_id}} </mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="mucDoMat">
+                <mat-header-cell *matHeaderCellDef mat-sort-header translate>
+                  <div translate>mucDoMat</div>
+                </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.mucDoMat}} </mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="description">
+                <mat-header-cell *matHeaderCellDef mat-sort-header translate>
+                  <div translate>description</div>
+                </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.description}} </mat-cell>
+              </ng-container>
+              <!-- actions -->
+              <mat-cell matColumnDef="actions">
+                <mat-header-cell *matHeaderCellDef layout-align="center">
+                  <button mat-icon-button color="primary" (click)="openUpdateDmDialog({name:'loaiVanBan'})"
+                    *ngIf="permission.DH_VB_LoaiVanBan._insert">
+                    <mat-icon aria-label="Add">add</mat-icon>
+                  </button>
+                </mat-header-cell>
+
+                <mat-cell *matCellDef="let row;">
+                  <button mat-icon-button color="accent" (click)="openUpdateDmDialog({name:'loaiVanBan', body: row})"
+                    *ngIf="permission.DH_VB_LoaiVanBan._update">
+                    <mat-icon aria-label="Edit">edit</mat-icon>
+                  </button>
+
+                  <button mat-icon-button color="warn" (click)="openDeleteDialog(row)"
+                    *ngIf="permission.DH_VB_LoaiVanBan._delete">
+                    <mat-icon aria-label="Delete">delete</mat-icon>
+                  </button>
+                </mat-cell>
+              </mat-cell>
+              <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+              <mat-row *matRowDef="let row; columns: displayedColumns;" [ngClass]="{ 'selected': row == selectedRow }"
+                (click)="onSelectedRow(row)">
+              </mat-row>
+            </mat-table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

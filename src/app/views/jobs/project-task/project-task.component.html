@@ -1,0 +1,225 @@
+<div class="animated fadeIn">
+  <div class="card card-default">
+    <div class="card-header">
+      <i class="fa fa-align-justify"></i><a [routerLink]="['/jobs']" translate>jobs</a>&nbsp;/&nbsp;
+      <strong translate>Tasks</strong>
+    </div>
+    <div class="card-body">
+      <form [formGroup]="searchForm" (ngSubmit)="onSearch()" novalidate>
+        <div class="row">
+          <div class="form-group col-sm-2">
+            <label translate>&nbsp;</label>
+            <div class="control">
+              <div class="input-group-prepend" dropdown>
+                <button type="button" class="btn btn-block input is-primary input" dropdownToggle translate>
+                  <label translate>Project </label>
+                  <label class="dropdown-toggle dropdown-toggle-right"></label>
+                </button>
+                <div class="dropdown-menu" *dropdownMenu (click)="$event.stopPropagation()">
+                  <kendo-treeview class="treeview" [nodes]="projects" [children]="children" [hasChildren]="hasChildren"
+                    textField="name" kendoTreeViewExpandable [kendoTreeViewCheckable]="checkableSettings"
+                    [(checkedKeys)]="id_projects" [checkBy]="'id'">
+                  </kendo-treeview>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group col-sm-3">
+            <label translate>&nbsp;</label>
+            <div class="control">
+              <div class="input-group-prepend" dropdown>
+                <button type="button" class="btn btn-block input is-primary input" dropdownToggle translate>
+                  <label translate>assignTo </label>
+                  <label class="dropdown-toggle dropdown-toggle-right"></label>
+                </button>
+                <div class="dropdown-menu" *dropdownMenu (click)="$event.stopPropagation()">
+                  <kendo-treeview class="treeview" [nodes]="accounts" [children]="children" [hasChildren]="hasChildren"
+                    textField="fullname" kendoTreeViewExpandable [kendoTreeViewCheckable]="checkableSettings"
+                    [(checkedKeys)]="assignTos" [checkBy]="'portal_account_id'">
+                  </kendo-treeview>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group col-sm-2">
+            <label translate>&nbsp;</label>
+            <div class="control">
+              <div class="input-group-prepend" dropdown>
+                <button type="button" class="btn btn-block input is-primary input" dropdownToggle translate>
+                  <label translate>id_account_incharge </label>
+                  <label class="dropdown-toggle dropdown-toggle-right"></label>
+                </button>
+                <div class="dropdown-menu" *dropdownMenu (click)="$event.stopPropagation()">
+                  <kendo-treeview class="treeview" [nodes]="accounts" [children]="children" [hasChildren]="hasChildren"
+                    textField="fullname" kendoTreeViewExpandable [kendoTreeViewCheckable]="checkableSettings"
+                    [(checkedKeys)]="id_account_incharges" [checkBy]="'portal_account_id'">
+                  </kendo-treeview>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group col-sm-3">
+            <label translate>&nbsp;</label>
+            <div class="control">
+              <div class="input-group-prepend" dropdown>
+                <button type="button" class="btn btn-block input is-primary input" dropdownToggle translate>
+                  <label translate>id_sys_workflow_state </label>
+                  <label class="dropdown-toggle dropdown-toggle-right"></label>
+                </button>
+                <div class="dropdown-menu" *dropdownMenu (click)="$event.stopPropagation()">
+                  <kendo-treeview class="treeview" [nodes]="sysWorkflowStates" [children]="children"
+                    [hasChildren]="hasChildren" textField="name" kendoTreeViewExpandable
+                    [kendoTreeViewCheckable]="checkableSettings" [(checkedKeys)]="id_sys_workflow_states"
+                    [checkBy]="'id'">
+                  </kendo-treeview>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group col-sm-2">
+            <label translate>id_dm_priority</label>
+            <div class="control">
+              <mat-select class="form-control input is-primary" formControlName="id_prioritys">
+                <mat-option *ngFor="let priority of prioritys" [value]="priority.value">
+                  {{priority.display}}
+                </mat-option>
+              </mat-select>
+            </div>
+          </div>
+          <div class="form-group col-sm-2">
+            <label translate>code(summary)</label>
+            <div class="control">
+              <input class="form-control input is-primary" formControlName="contents" />
+            </div>
+          </div>
+          <div class="form-group col-sm-2">
+            <label translate>createDateFrom</label>
+            <div class="control">
+              <input type="date" class="form-control input is-primary" formControlName="createDateFrom" />
+            </div>
+          </div>
+          <div class="form-group col-sm-2">
+            <label translate>createDateTo</label>
+            <div class="control">
+              <input type="date" class="form-control input is-primary" formControlName="createDateTo" />
+            </div>
+          </div>
+          <div class="form-group col-sm-2">
+            <label translate>dueDateFrom</label>
+            <div class="control">
+              <input type="date" class="form-control input is-primary" formControlName="dueDateFrom" />
+            </div>
+          </div>
+          <div class="form-group col-sm-2">
+            <label translate>dueDateTo</label>
+            <div class="control">
+              <input type="date" class="form-control input is-primary" formControlName="dueDateTo" />
+            </div>
+          </div>
+          <div class="form-group col-sm-2">
+            <label></label>
+            <div class="control">
+              <button type="submit" class="button is-primary"><i class="fa fa-search"></i> Search</button>
+            </div>
+          </div>
+        </div>
+      </form>
+      <div class="row">
+        <div class="mat-elevation-z8">
+          <mat-table [dataSource]="dataSource" matSort>
+            <ng-container matColumnDef="index">
+              <th mat-header-cell class="index" *matHeaderCellDef>
+                <label>Index </label>
+              </th>
+              <td mat-cell class="index" *matCellDef="let element; index as i">
+                {{ paginator.pageSize * paginator.pageIndex + i + 1 }}
+              </td>
+            </ng-container>
+            <ng-container matColumnDef="code">
+              <mat-header-cell *matHeaderCellDef mat-sort-header><label translate>code </label>
+              </mat-header-cell>
+              <mat-cell *matCellDef="let row"> {{row.code}} </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="summary">
+              <mat-header-cell *matHeaderCellDef mat-sort-header><label translate>summary </label>
+              </mat-header-cell>
+              <mat-cell *matCellDef="let row"><label class="text2p" [innerHTML]="row.summary"></label></mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="nguoiPhuTrach">
+              <mat-header-cell *matHeaderCellDef mat-sort-header><label translate>id_account_incharge </label>
+              </mat-header-cell>
+              <mat-cell *matCellDef="let row"> {{row.nguoiPhuTrach}} </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="trangThai">
+              <mat-header-cell *matHeaderCellDef mat-sort-header><label translate>id_sys_workflow_state </label>
+              </mat-header-cell>
+              <mat-cell *matCellDef="let row"> {{row.trangThai}} </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="dueDate">
+              <mat-header-cell *matHeaderCellDef mat-sort-header><label translate>dueDate </label>
+              </mat-header-cell>
+              <mat-cell *matCellDef="let row"> {{row.dueDate | amFromUtc | amDateFormat: 'DD/MM/YYYY'}} </mat-cell>
+            </ng-container>
+            <!-- Actions Column-->
+            <!-- actions -->
+            <mat-cell matColumnDef="actions">
+              <mat-header-cell *matHeaderCellDef>
+                <button (click)="openProjectTaskDialog({id_project : id_project})" mat-icon-button color="primary"
+                  *ngIf="permission.DH_CV_QuanLyCongViec._insert">
+                  <mat-icon aria-label="Insert">add</mat-icon>
+                </button>
+                <button (click)="exportProjectTask()" mat-button color="primary"
+                *ngIf="permission.DH_CV_QuanLyCongViec._export">
+                Export File
+              </button>
+              </mat-header-cell>
+
+              <mat-cell *matCellDef="let row;">
+                <mat-select id="actions" placeholder="Tùy chọn">
+                  <mat-option [routerLink]="['/jobs/project/task/detail/'+row.code]">
+                    <button mat-icon-button>
+                      &nbsp;<i class="fa fa-info fa-lg"></i>&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      <label translate>Detail</label>
+                    </button>
+                  </mat-option>
+                  <mat-option (click)="openAttachFiles({tableName:'jobs_project_task', id_data: row.id, permission: permissionAttachsFile})"
+                    *ngIf="permission.DH_CV_QuanLyCongViec._insert">
+                    <button mat-icon-button>
+                      <i class="fa fa-download fa-lg"></i> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      <label translate>viewAttachFiles</label>
+                    </button>
+                  </mat-option>
+                  <mat-option (click)="openProjectTaskDialog({id_project : row.id_project, subTask:row})"
+                    *ngIf="permission.DH_CV_QuanLyCongViec._insert && row.isSubTask.data[0] == 0">
+                    <button mat-icon-button>
+                      <mat-icon aria-label="Add Subtask">edit</mat-icon>
+                      <label translate>Add Subtask</label>
+                    </button>
+                  </mat-option>
+                  <mat-option (click)="openProjectTaskDialog({id_project : id_project, body : row})"
+                  *ngIf="permission.DH_CV_QuanLyCongViec._delete">
+                  <button mat-icon-button>
+                    <mat-icon aria-label="Edit">edit</mat-icon>
+                    <label translate>Edit</label>
+                  </button>
+                </mat-option>
+                  <mat-option (click)="openDeleteDialog(row)">
+                    <button mat-icon-button>
+                      <mat-icon aria-label="Delete">delete</mat-icon>
+                      <label translate>Delete</label>
+                    </button>
+                  </mat-option>
+                </mat-select>
+              </mat-cell>
+            </mat-cell>
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;" [ngClass]="{ 'selected': row == selectedRow }"
+              (click)="onSelectedRow(row)">
+            </mat-row>
+          </mat-table>
+          <mat-paginator [pageSizeOptions]="[10, 25, 50, 100]"></mat-paginator>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

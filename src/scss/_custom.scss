@@ -1,0 +1,196 @@
+// Here you can add other styles
+.mat-elevation-z8 {
+  width: 100% !important;
+}
+.mat-row:hover {
+  background-color: beige;
+}
+.selected {
+  background-color: beige;
+}
+.center {
+  position: absolute;
+  top: 80%;
+  left: 50%;
+  -moz-transform: translateX(-50%) translateY(-50%);
+  -webkit-transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-50%);
+}
+.dropdown-toggle-right {
+  position: absolute;
+  top: 50%;
+  left: 90%;
+  -moz-transform: translateX(-50%) translateY(-50%);
+  -webkit-transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-50%);
+}
+.dropdown-toggle-right1 {
+  position: absolute;
+  top: 50%;
+  left: 95%;
+  -moz-transform: translateX(-50%) translateY(-50%);
+  -webkit-transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-50%);
+}
+.right10percent {
+  position: absolute;
+  top: 50%;
+  left: 40%;
+  -moz-transform: translateX(-50%) translateY(-50%);
+  -webkit-transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-50%);
+}
+.text2p * {
+  font-size: 14px !important;
+}
+.margin {
+  position: absolute;
+  margin-top: 15px;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  -moz-transform: translateX(-50%) translateY(-50%);
+  -webkit-transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-50%);
+}
+.border-custom {
+  border-bottom: 2px solid LightGray;
+  border-top: 2px solid LightGray;
+}
+.border-search {
+  border-radius: 0px;
+  border: 2px solid #00c4a7;
+  width: 100% !important;
+}
+.border-bot {
+  border-bottom: 2px solid LightGray;
+}
+.text-center {
+  text-align: center;
+}
+// chat template
+.msg_history {
+  overflow-y: auto;
+}
+.mesgs {
+  float: left;
+  padding: 5px 15px 0 15px;
+  width: 100%;
+}
+.received_msg {
+  display: inline-block;
+  padding: 0 0 0 10px;
+  vertical-align: top;
+  width: 100%;
+}
+.received_withd_msg p {
+  background: #ebebeb none repeat scroll 0 0;
+  border-radius: 3px;
+  color: #646464;
+  font-size: 14px;
+  margin: 0;
+  padding: 5px 10px 5px 12px;
+  width: 100%;
+  position: relative;
+}
+.input_msg_write input {
+  background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+  border: medium none;
+  color: #4c4c4c;
+  font-size: 15px;
+  min-height: 48px;
+  width: 100%;
+}
+.msg_edit_btn {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 17px;
+  position: absolute;
+  height: 30px;
+  right: 0%;
+  top: 0px;
+  width: 30px;
+}
+.type_msg {
+  width: 98%;
+}
+.treeview {
+  position: relative;
+  min-width: 6.625rem;
+  padding: 0.5rem 0 1.5rem;
+  width: 100%;
+  margin-top: 4px;
+  padding-bottom: 2px;
+  outline: 0;
+  cursor: pointer;
+}
+.treeview :checked {
+  background-color: #2196f3;
+  border: none;
+}
+// loading background
+.spinner_container {
+  border-radius: 10px;
+  height: 70px;
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 70px;
+  z-index: 3;
+  opacity: 0.5;
+}
+.dark-overlay * {
+  background-color: rgba(0, 0, 0, 0.7);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-height: 805px;
+}
+.th-center {
+  text-align: center;
+}
+.th-left {
+  text-align: left;
+}
+.th-right {
+  text-align: right;
+}
+.w-30 {
+  width: 30%;
+}
+
+.w-5 {
+  width: 5%;
+}
+
+.index {
+  border-bottom: 0px !important;
+  margin-top: 0px;
+  width: 9%;
+}
+// .mat-cell {
+//   text-align: left;
+// }
+
+.custom-row{
+  border-bottom: 0px !important;
+  margin-top: 0px;
+  flex-direction: column;
+  justify-content: center;
+}
+.custom-border-table{
+  // border-bottom: 1px solid LightGray;
+  // border-top: 1px solid LightGray;
+
+  border: 1px solid LightGray;
+  // border-width: 80% 1px
+  // margin-right: 2%;
+  // margin-left: 2%;
+}
+.leaflet-draw-draw-polyline *{
+  background-image: url('../assets/img/avatars/1.jpg') !important;
+  background-repeat: no-repeat !important;
+}  

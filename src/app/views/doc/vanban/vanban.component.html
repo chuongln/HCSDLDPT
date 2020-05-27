@@ -1,0 +1,234 @@
+<div class="animated fadeIn">
+  <div class="card card-default">
+    <div class="card-header">
+      <i class="fa fa-align-justify"></i><a [routerLink]="['/doc']" translate>doc</a>&nbsp;/&nbsp;
+      <strong translate>{{codeDataType}}</strong>
+    </div>
+    <div class="card-body">
+      <mat-expansion-panel class="border-search">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <strong translate>Search</strong>
+          </mat-panel-title>
+          <mat-panel-description>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <form [formGroup]="searchForm" (ngSubmit)="onSearch()" novalidate>
+          <div class="row">
+            <div class="form-group col-sm-3">
+              <label translate>soVaoSo</label>
+              <div class="control">
+                <input class="form-control input is-primary" formControlName="soVaoSo" />
+              </div>
+            </div>
+            <div class="form-group col-sm-3">
+              <label translate>trichYeu</label>
+              <div class="control">
+                <input class="form-control input is-primary" formControlName="trichYeu" />
+              </div>
+            </div>
+            <div class="form-group col-md-3">
+              <label translate>coQuanBanHanh</label>
+              <div class="control">
+                <mat-select class="form-control input is-primary" formControlName="id_dm_coQuanBanHanh">
+                  <mat-option>
+                    <div translate>None</div>
+                  </mat-option>
+                  <mat-option *ngFor="let coQuanBanHanh of coQuanBanHanhs" [value]="coQuanBanHanh.value">
+                    {{coQuanBanHanh.display}}
+                  </mat-option>
+                </mat-select>
+              </div>
+            </div>
+            <div class="form-group col-md-3">
+              <label translate>hinhThucGuiNhan</label>
+              <div class="control">
+                <mat-select class="form-control input is-primary" formControlName="id_dm_hinhThucGuiNhan">
+                  <mat-option>
+                    <div translate>None</div>
+                  </mat-option>
+                  <mat-option *ngFor="let hinhThucGuiNhan of hinhThucGuiNhans" [value]="hinhThucGuiNhan.value">
+                    {{hinhThucGuiNhan.display}}
+                  </mat-option>
+                </mat-select>
+              </div>
+            </div>
+            <div class="form-group col-sm-3">
+              <label translate>ngayBanHanhTu</label>
+              <div class="control">
+                <input type="date" class="form-control input is-primary" formControlName="ngayBanHanhTu" />
+              </div>
+            </div>
+            <div class="form-group col-sm-3">
+              <label translate>ngayBanHanhDen</label>
+              <div class="control">
+                <input type="date" class="form-control input is-primary" formControlName="ngayBanHanhDen" />
+              </div>
+            </div>
+            <div class="form-group col-sm-3">
+              <label translate>ngayThucHienTu</label>
+              <div class="control">
+                <input type="date" class="form-control input is-primary" formControlName="ngayThucHienTu" />
+              </div>
+            </div>
+            <div class="form-group col-sm-3">
+              <label translate>ngayThucHienDen</label>
+              <div class="control">
+                <input type="date" class="form-control input is-primary" formControlName="ngayThucHienDen" />
+              </div>
+            </div>
+            <div class="form-group col-md-2">
+              <label translate>loaiVanBan</label>
+              <div class="control">
+                <mat-select class="form-control input is-primary" formControlName="id_dm_loaiVanBan">
+                  <mat-option>
+                    <div translate>None</div>
+                  </mat-option>
+                  <mat-option *ngFor="let loaiVanBan of loaiVanBans" [value]="loaiVanBan.value">
+                    {{loaiVanBan.display}}
+                  </mat-option>
+                </mat-select>
+              </div>
+            </div>
+            <div class="form-group col-md-2">
+              <label translate>linhVucVanBan</label>
+              <div class="control">
+                <mat-select class="form-control input is-primary" formControlName="id_dm_linhVucVanBan">
+                  <mat-option>
+                    <div translate>None</div>
+                  </mat-option>
+                  <mat-option *ngFor="let linhVucVanBan of linhVucVanBans" [value]="linhVucVanBan.value">
+                    {{linhVucVanBan.display}}
+                  </mat-option>
+                </mat-select>
+              </div>
+            </div>
+            <div class="form-group col-md-2">
+              <label translate>mucDoKhan</label>
+              <div class="control">
+                <mat-select class="form-control input is-primary" formControlName="id_dm_mucDoKhan">
+                  <mat-option>
+                    <div translate>None</div>
+                  </mat-option>
+                  <mat-option *ngFor="let mucDoKhan of mucDoKhans" [value]="mucDoKhan.value">
+                    {{mucDoKhan.display}}
+                  </mat-option>
+                </mat-select>
+              </div>
+            </div>
+            <div class="form-group col-md-2">
+              <label translate>mucDoMat</label>
+              <div class="control">
+                <mat-select class="form-control input is-primary" formControlName="id_dm_mucDoMat">
+                  <mat-option>
+                    <div translate>None</div>
+                  </mat-option>
+                  <mat-option *ngFor="let mucDoMat of mucDoMats" [value]="mucDoMat.value">
+                    {{mucDoMat.display}}
+                  </mat-option>
+                </mat-select>
+              </div>
+            </div>
+            <div class="form-group col-sm-2">
+              <label></label>
+              <div class="control">
+                <button type="submit" class="button is-primary"><i class="fa fa-search"></i> Search</button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </mat-expansion-panel>
+      <div class="row">
+        <div class="mat-elevation-z8">
+          <mat-table [dataSource]="dataSource" matSort>
+            <ng-container matColumnDef="index">
+              <th mat-header-cell class="index" *matHeaderCellDef>
+                <label>Index </label>
+              </th>
+              <td mat-cell class="index" *matCellDef="let element; index as i">
+                {{ paginator.pageSize * paginator.pageIndex + i + 1 }}
+              </td>
+            </ng-container>
+            <ng-container matColumnDef="soVaoSo">
+              <mat-header-cell *matHeaderCellDef mat-sort-header><label translate>soVaoSo </label>
+              </mat-header-cell>
+              <mat-cell *matCellDef="let row"> {{row.soVaoSo}} </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="trichYeu">
+              <mat-header-cell *matHeaderCellDef mat-sort-header>
+                <div translate>trichYeu </div>
+              </mat-header-cell>
+              <mat-cell *matCellDef="let row">
+                <div class="text2p" [innerHTML]="row.trichYeu">
+                </div>
+              </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="ngayBanHanh">
+              <mat-header-cell *matHeaderCellDef mat-sort-header><label translate>ngayBanHanh </label>
+              </mat-header-cell>
+              <mat-cell *matCellDef="let row"> {{row.ngayBanHanh | amFromUtc | amDateFormat: 'DD/MM/YYYY'}} </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="ngayHetHieuLuc">
+              <mat-header-cell *matHeaderCellDef mat-sort-header><label translate>ngayHetHieuLuc </label>
+              </mat-header-cell>
+              <mat-cell *matCellDef="let row"> {{row.ngayHetHieuLuc | amFromUtc | amDateFormat: 'DD/MM/YYYY'}}
+              </mat-cell>
+            </ng-container>
+            <!-- Actions Column-->
+            <!-- actions -->
+            <mat-cell matColumnDef="actions">
+              <mat-header-cell *matHeaderCellDef>
+                <button (click)="openUpdateDialog({'type':codeDataType})" mat-icon-button color="primary"
+                  *ngIf="permission.DH_VB_CongVanDen._insert">
+                  <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>
+                </button>
+              </mat-header-cell>
+              <mat-cell *matCellDef="let row;">
+                <mat-select id="actions" placeholder="Tùy chọn">
+                  <mat-option (click)="openDetailDialog({'type':codeDataType, 'body': row})">
+                    <button mat-icon-button>
+                      <mat-icon aria-label="Detail">search</mat-icon>
+                      <label translate>viewDetail</label>
+                    </button>
+                  </mat-option>
+                  <mat-option (click)="openAttachFiles({tableName:'doc_vanban', id_data: row.id})"
+                    *ngIf="permission.DH_VB_CongVanDen._insert || permission.DH_VB_CongVanDi._insert || permission.DH_VB_TaiLieuVanBan._insert ">
+                    <button mat-icon-button>
+                      <i class="fa fa-download fa-lg"></i> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      <label translate>viewAttachFiles</label>
+                    </button>
+                  </mat-option>
+                  <mat-option (click)="openComments({'id':row.id, 'code': codeDataType})">
+                    <button mat-icon-button>
+                      <i class="fa fa-comment fa-lg"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      <label translate>Comment</label>
+                    </button>
+                  </mat-option>
+                  <mat-option (click)="openUpdateDialog({'type':codeDataType, 'body': row})"
+                    *ngIf="permission.DH_VB_CongVanDen._update || permission.DH_VB_CongVanDi._update || permission.DH_VB_TaiLieuVanBan._update ">
+                    <button mat-icon-button>
+                      <mat-icon aria-label="Edit">edit</mat-icon>
+                      <label translate>Edit</label>
+                    </button>
+                  </mat-option>
+                  <mat-option (click)="openDeleteDialog(row)"
+                    *ngIf="permission.DH_VB_CongVanDen._delete || permission.DH_VB_CongVanDi._delete || permission.DH_VB_TaiLieuVanBan._delete ">
+                    <button mat-icon-button>
+                      <mat-icon aria-label="Delete">delete</mat-icon>
+                      <label translate>Delete</label>
+                    </button>
+                  </mat-option>
+                </mat-select>
+              </mat-cell>
+            </mat-cell>
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;" [ngClass]="{ 'selected': row == selectedRow }"
+              (click)="onSelectedRow(row)">
+            </mat-row>
+          </mat-table>
+          <mat-paginator [pageSizeOptions]="[10, 25, 50, 100]"></mat-paginator>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
