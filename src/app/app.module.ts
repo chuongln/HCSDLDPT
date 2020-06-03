@@ -56,9 +56,6 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { ChartsModule } from 'ng2-charts';
 import { ngModuleJitUrl } from '@angular/compiler';
-import { ConfirmationDialogComponent } from './views/shared/confirmation-dialog/confirmation-dialog.component';
-import { AttachFilesDialogComponent } from './views/shared/attach-files-dialog/attach-files-dialog.component';
-import { CommentsComponent } from './views/shared/comments/comments.component';
 import { LoaderComponent } from './views/shared/loader/loader.component';
 
 // Import Translate module
@@ -122,15 +119,9 @@ export function translateHttpLoaderFactory(http: HttpClient) {
     P500Component,
     LoginComponent,
     RegisterComponent,
-    ConfirmationDialogComponent,
-    AttachFilesDialogComponent,
-    CommentsComponent,
     LoaderComponent,
   ],
   entryComponents: [
-    ConfirmationDialogComponent,
-    AttachFilesDialogComponent,
-    CommentsComponent
   ],
   providers: [{
     provide: LocationStrategy,

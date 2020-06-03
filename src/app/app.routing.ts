@@ -8,7 +8,6 @@ import { P404Component } from './views/error/404.component';
 import { P500Component } from './views/error/500.component';
 import { LoginComponent } from './views/login/login.component';
 import { RegisterComponent } from './views/register/register.component';
-import { ChangePassComponent } from './views/change-pass/change-pass.component';
 
 export const routes: Routes = [
   {
@@ -82,10 +81,6 @@ export const routes: Routes = [
       {
         path: 'widgets',
         loadChildren: () => import('./views/widgets/widgets.module').then(m => m.WidgetsModule)
-      },
-      {
-        path: 'change-pass',
-        loadChildren: () => import('./views/change-pass/change-pass.module').then(m => m.ChangePassModule)
       }
     ]
   },

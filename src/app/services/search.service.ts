@@ -13,10 +13,10 @@ export class SearchService {
     private router: Router
   ) { }
 
-  //#region 
+  //#region
   get(data: any): Observable<any> {
     return this.httpService.postFile('predict', data);
-  } 
+  }
   getData(data: any): Observable<any> {
     return this.httpService.getData(data);
   }

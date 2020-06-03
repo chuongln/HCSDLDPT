@@ -14,9 +14,6 @@ export class AuthService {
     private router: Router
   ) { }
 
-  refreshToken() {
-    this.httpService.refreshToken();
-  }
 
   getToken(postData: any): Observable<any> {
     return this.httpService.post_authenticate('auth/token', postData);

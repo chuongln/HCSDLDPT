@@ -1,0 +1,109 @@
+<div class="animated fadeIn">
+  <div class="card card-default">
+    <div class="card-body">
+      <form [formGroup]="searchForm" class="border" (ngSubmit)="onSearch()" novalidate>
+        <div> &nbsp;&nbsp;</div>
+        <div class="col-sm-12 row">
+          <div class="form-group col-sm-6">
+            <label translate>Tải lên hình ảnh</label>
+            <div class="control center">
+              <input type="file" id="file" (change)="handleFileInput($event.target.files) ">
+            </div>
+          </div>
+          <div class="form-group col-sm-6">
+            <label></label>
+            <div class="control center">
+              <button type="submit" class="button is-primary"><i class="fa fa-search"></i> Search</button>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-12 row">
+          <div class="form-group col-sm-3">
+            <label translate></label>
+          </div>
+          <div class="form-group col-sm-6">
+            <img [src]="img" *ngIf="img">
+          </div>
+        </div>
+      </form>
+      <div> &nbsp;&nbsp;</div>
+      <p-tabView *ngIf="obj">
+        <p-tabPanel header="Nhà hàng">
+          <div class="row">
+            <div *ngFor="let item of obj" class="col-sm-6 col-lg-3">
+              <button class="card text-white float-right p-1 "
+              [ngStyle]="{'background-image': 'url('+item.images[0]+')'}"
+                style="width: 100%;height:170px !important; text-align: center;  background-size: 300px 170px;
+                " >
+                <div class="card-body">
+                  <div class="text-value" translate>{{item.name}}</div>
+                  <div>Rate: {{item.rate}}/10</div>
+                  <div>{{item.address}}</div>
+                </div>
+              </button>
+            </div>
+            <!-- <div class="col-sm-6 col-lg-3">
+              <button class="card text-white float-right p-1 "
+                style="width: 100%;height:170px; text-align: center;   background-image: url(../../../assets/img/nha.jfif);" [routerLink]="['/map']">
+                <div class="card-body">
+                  <button type="button" class="btn btn-transparent ">
+                    <i class="icon-location-pin"></i>
+                  </button>
+                  <div class="text-value" translate>Nhà hàng A</div>
+                  11h-20h, 7 món, 121 Lê Thanh Nghị
+                </div>
+              </button>
+            </div>
+            <div class="col-sm-6 col-lg-3">
+              <button class="card text-white" style="width: 100%;height:170px;  background-image: url(../../../assets/img/nhb.jfif);" [routerLink]="['/']">
+                <div class="card-body">
+                  <button type="button" class="btn btn-transparent p-1 ">
+                    <i class="icon-location-pin"></i>
+                  </button>
+                  <div class="text-value" translate>Nhà hàng B</div>
+                  11h-20h, 7 món, 121 Lê Thanh Nghị
+                </div>
+              </button>
+            </div> -->
+       
+          </div>
+        </p-tabPanel>
+        <p-tabPanel header="Địa điểm">
+          <div class="row">
+            <div class="col-md-3">
+              <table class="table table-striped table-bordered">
+                <tbody>
+                  <tr>
+                    <td translate>Tên nhà hàng</td>
+                    <td>{{data.name}}</td>
+                  </tr>
+                  <tr>
+                    <td translate>Địa chỉ</td>
+                    <td>{{data.address}}</td>
+                  </tr>
+                  <tr>
+                    <td translate>Rate</td>
+                    <td>{{data.rate}}/10</td>
+                  </tr>
+                </tbody>
+
+              </table>
+            </div>
+            <div class="col-md-9 card-body">
+              <div style="height: 500px; width: 100%;" leaflet [leafletOptions]="options"
+                (leafletMapReady)="onMapReady($event)">
+                <div *ngFor="let l of markerData" [leafletLayer]="l">
+
+                </div>
+                <div *ngIf="myLocate" [leafletLayer]="myLocate">
+                </div>
+              </div>
+            </div>
+          </div>
+        </p-tabPanel>
+      </p-tabView>
+
+    </div>
+  </div>
+  <!--/.row-->
+</div>
