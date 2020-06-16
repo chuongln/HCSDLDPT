@@ -1,6 +1,8 @@
 <div class="animated fadeIn">
   <div class="card card-default">
-    <div class="card-body">
+    <div class="card-body" >
+      <h1 style="text-align: center !important;">Tìm kiếm món ăn bằng hình ảnh</h1>
+
       <form [formGroup]="searchForm" class="border" (ngSubmit)="onSearch()" novalidate>
         <div> &nbsp;&nbsp;</div>
         <div class="col-sm-12 row">
@@ -30,6 +32,7 @@
       <p-tabView *ngIf="obj">
         <p-tabPanel header="Nhà hàng">
           <div class="row">
+            <h2 *ngIf="isData == false" class="text-center">Không tìm thấy dữ liệu phù hợp</h2>
             <div *ngFor="let item of obj" class="col-sm-6 col-lg-3">
               <button class="card text-white float-right p-1 "
               [ngStyle]="{'background-image': 'url('+item.images[0]+')'}"
@@ -42,30 +45,6 @@
                 </div>
               </button>
             </div>
-            <!-- <div class="col-sm-6 col-lg-3">
-              <button class="card text-white float-right p-1 "
-                style="width: 100%;height:170px; text-align: center;   background-image: url(../../../assets/img/nha.jfif);" [routerLink]="['/map']">
-                <div class="card-body">
-                  <button type="button" class="btn btn-transparent ">
-                    <i class="icon-location-pin"></i>
-                  </button>
-                  <div class="text-value" translate>Nhà hàng A</div>
-                  11h-20h, 7 món, 121 Lê Thanh Nghị
-                </div>
-              </button>
-            </div>
-            <div class="col-sm-6 col-lg-3">
-              <button class="card text-white" style="width: 100%;height:170px;  background-image: url(../../../assets/img/nhb.jfif);" [routerLink]="['/']">
-                <div class="card-body">
-                  <button type="button" class="btn btn-transparent p-1 ">
-                    <i class="icon-location-pin"></i>
-                  </button>
-                  <div class="text-value" translate>Nhà hàng B</div>
-                  11h-20h, 7 món, 121 Lê Thanh Nghị
-                </div>
-              </button>
-            </div> -->
-       
           </div>
         </p-tabPanel>
         <p-tabPanel header="Địa điểm">

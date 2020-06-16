@@ -13,6 +13,7 @@ import * as L from 'leaflet';
   templateUrl: 'dashboard.component.html'
 })
 export class DashboardComponent implements OnInit {
+  isData = true;
   constructor(
     private fb: FormBuilder,
     private searchService: SearchService,
@@ -84,6 +85,9 @@ export class DashboardComponent implements OnInit {
         this.searchService.get(reader.result.toString().split(',')[1])
           .subscribe(res => {
             this.obj = res.restaurants;
+            if (res.restaurants == 0) {
+              this.isData = false;
+            }
             for (let i = 0; i < this.obj.length; i++) {
               this.markerData.push(marker(this.obj[i].coordination, {
                 icon: icon({
@@ -98,6 +102,8 @@ export class DashboardComponent implements OnInit {
                   this.zone.run(() => this.onMapClick(e));
                 }));
             }
+          }, error => {
+            this.isData = false;
           });
       };
       reader.onerror = function (error) {
