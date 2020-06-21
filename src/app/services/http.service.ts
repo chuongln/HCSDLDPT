@@ -21,20 +21,29 @@ export class HttpService {
 
 
   post_authenticate(serviceName: string, data: any) {
-    const url = environment.apiUrl + serviceName;
+    const url = 'http://192.168.1.40:8080/server_war/rest/public/auth/login';
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     const options = { headers: headers };
     return this.http.post(url, JSON.stringify(data), options);
   }
 
   post(serviceName: string, data: any) {
-    const url = environment.apiUrl + serviceName;
+    const form = new FormData();
+    form.append('category', data);
+    const url = 'http://139.162.10.81:5000/search';
     const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Postman-Token': 'c36f9733-dffe-4a9a-9481-cf198eeccd6a'
+      'cache-control': 'no-cache',
+      'Postman-Token': 'c36f9733-dffe-4a9a-9481-cf198eeccd6a',
     });
-    const options = { headers: headers };
-    return this.http.post<any>(url, JSON.stringify(data), options);
+    const options = {
+      headers: headers,
+      'async': true,
+      'crossDomain': true,
+      'processData': false,
+      'contentType': false,
+      'mimeType': 'multipart/form-data',
+    };
+    return this.http.post<any>(url, form, options);
   }
 
   postAttachFile(serviceName: string, data: any) {

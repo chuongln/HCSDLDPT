@@ -42,6 +42,8 @@ export class LoginComponent implements OnInit {
       this.authService.getToken(this.postData).subscribe(
         (res: any) => {
           if (res) {
+            console.log(res);
+
             if (res.error) {
               this.common.messageErr(res);
             } else if (res.auth) {
@@ -57,6 +59,7 @@ export class LoginComponent implements OnInit {
           }
         },
         (error: any) => {
+          console.log(error);
           this.common.messageErr(error);
           console.log(error);
         }

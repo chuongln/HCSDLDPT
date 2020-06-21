@@ -57,15 +57,27 @@ export class DashboardComponent implements OnInit {
   public files: Array<File> = [];
   searchForm: FormGroup;
   form = new FormData();
-  img: any;
+  img: any = '';
+  fileName: any = '';
+  category: string;
   ngOnInit(): void {
     this.createSearchForm();
-    this.onSearch();
+    // this.onSearch();
   }
   onMapClick(e) {
     e.target.closePopup();
     this.map.setView(e.latlng, 13);
     this.data = JSON.parse(e.target._popup._content);
+  }
+  onChangeCategory(data: any) {
+    this.category = data;
+  }
+  onRemove() {
+    console.log(this.fileToUpload);
+    this.fileToUpload = null;
+    this.img = '';
+    this.fileName = null;
+    this.isData = true;
   }
   createSearchForm() {
     this.searchForm = this.fb.group(
@@ -75,6 +87,7 @@ export class DashboardComponent implements OnInit {
       });
   }
   onSearch() {
+    this.form = new FormData();
     if (this.fileToUpload) {
       const reader = new FileReader();
       reader.readAsDataURL(this.fileToUpload);
@@ -109,13 +122,33 @@ export class DashboardComponent implements OnInit {
       reader.onerror = function (error) {
         console.log('Error: ', error);
       };
+    } else if (this.category) {
+      // this.form.append('category', this.category);
+      this.searchService.search(this.category)
+        .subscribe(res => {
+          console.log(res);
+          this.obj = res.restaurants;
+          if (res.restaurants == 0) {
+            this.isData = false;
+          }
+          for (let i = 0; i < this.obj.length; i++) {
+            this.markerData.push(marker(this.obj[i].coordination, {
+              icon: icon({
+                iconSize: [25, 45],
+                iconUrl: 'marker-icon.png',
+              })
+            }
+            )
+              .bindPopup(JSON.stringify({ index: i, ... this.obj[i] }))
+              .bindTooltip(this.obj[i].name)
+              .on('click', (e) => {
+                this.zone.run(() => this.onMapClick(e));
+              }));
+          }
+        }, error => {
+          this.isData = false;
+        });
     }
-    // else {
-    //   this.searchService.getData(this.form)
-    //     .subscribe(res => {
-    //       console.log(res);
-    //     });
-    // }
   }
   handleFileInput(files: FileList) {
     this.fileToUpload = files.item(0);
